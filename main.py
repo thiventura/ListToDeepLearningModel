@@ -1,5 +1,6 @@
 from google_images_download import google_images_download
 import Augmentor
+from retrain import retrain
 import os.path
 
 
@@ -8,7 +9,7 @@ AUGMENTATION_QUANTITY_IMAGES = 10
 output_directory = os.path.join("dataset", "download")
 
 
-# Load classes from CSV
+# Load classes from CSV and creating dataset
 classesFileName = os.path.join("samples", "pokemon.csv")
 classesFile = open(classesFileName, "r")
 for classData in classesFile:
@@ -38,3 +39,7 @@ for classData in classesFile:
     p.zoom(probability=0.5, min_factor=1.1, max_factor=1.5)
     p.sample(AUGMENTATION_QUANTITY_IMAGES)
     p.process()
+
+
+# Training model
+retrain()
