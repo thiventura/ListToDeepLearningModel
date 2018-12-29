@@ -101,9 +101,21 @@ if __name__ == '__main__':
       help='Should perform training to generate the new model?',
       action="store_true"
   )
+  parser.add_argument(
+      '--steps',
+      type=int,
+      default=4000,
+      help='How many steps on training process.'
+  )
+  parser.add_argument(
+      '--architecture',
+      type=str,
+      default="inception_v3",
+      help='Relative path to the file where are listed the classes and keywords.'
+  )
   FLAGS = parser.parse_args()
 
   downloadAndDataAugmentation()
 
   if not FLAGS.no_training:
-    retrain()
+    retrain(FLAGS.steps, FLAGS.architecture)

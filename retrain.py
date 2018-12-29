@@ -57,8 +57,8 @@ flip_left_right = False
 random_crop = 0
 random_scale = 0
 random_brightness = 0
-how_many_training_steps = 4000
-architecture = "inception_v3"
+how_many_training_steps = None
+architecture = None
 
 # These are all parameters that are tied to the particular model architecture
 # we're using for Inception v3. These include things like tensor names and their
@@ -1085,6 +1085,11 @@ def main(_):
       f.write('\n'.join(image_lists.keys()) + '\n')
 
 
-def retrain():
-  #tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+def retrain(steps, arch):
+  global how_many_training_steps
+  global architecture
+  
+  how_many_training_steps = steps
+  architecture = arch
+
   tf.app.run(main=main)
