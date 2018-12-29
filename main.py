@@ -4,8 +4,8 @@ from retrain import retrain
 import os.path
 
 
-DOWNLOAD_QUANTITY_PER_CLASS = 2
-AUGMENTATION_QUANTITY_IMAGES = 10
+DOWNLOAD_QUANTITY_PER_CLASS = 50
+AUGMENTATION_QUANTITY_IMAGES = 200
 output_directory = os.path.join("dataset", "download")
 
 
@@ -35,8 +35,11 @@ for classData in classesFile:
     p = Augmentor.Pipeline(
         os.path.join(output_directory, className),
         os.path.join("..", "..", "augmented", className) )
-    p.rotate(probability=0.7, max_left_rotation=10, max_right_rotation=10)
+    p.rotate(probability=0.7, max_left_rotation=25, max_right_rotation=25)
     p.zoom(probability=0.5, min_factor=1.1, max_factor=1.5)
+    p.crop_random(probability=0.7, percentage_area=0.8)  
+    p.flip_left_right(probability=0.5)
+    p.resize(probability=1.0, width=300, height=300)
     p.sample(AUGMENTATION_QUANTITY_IMAGES)
     p.process()
 
