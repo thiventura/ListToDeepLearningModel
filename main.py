@@ -10,7 +10,7 @@ output_directory = os.path.join("dataset", "download")
 
 
 # Load classes from CSV and creating dataset
-classesFileName = os.path.join("samples", "pokemon.csv")
+classesFileName = os.path.join("samples", "pokemon151.csv")
 classesFile = open(classesFileName, "r")
 for classData in classesFile:
     className, classKeywords = classData.split(",")
