@@ -3,6 +3,10 @@
 ## Summary
 The ideia of this script is automatically to create a dataset from a simple list and training a new deep learning model. Based on a list of classes and its keywords, the script will download several images from internet, perform data augmentation and training the model.
 
+## Requirements
+* Python 3.6
+* Tensorflow 1.5
+
 ## Setting your classes and keywords
 You just need to define one text file to create your deep learning model. A sample of this kind of file is in `samples` folder. You have to put one line for each class of your model. In each line you have to put the class name and keywords for this class. The script will use Google Images to query images for your class. 
 
