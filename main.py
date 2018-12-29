@@ -21,22 +21,23 @@ for classData in classesFile:
     try:
         imagesDownloaded = len([name for name in os.listdir(classFolder) if os.path.isfile(os.path.join(classFolder, name))])
     except:
-        imagesDownloaded = 1
+        imagesDownloaded = 0
 
-    # Download images
-    response = google_images_download.googleimagesdownload()
-    arguments = {
-        "keywords": classKeywords,
-        "limit": DOWNLOAD_QUANTITY_PER_CLASS,
-        "format": "jpg",
-        "color_type": "full-color",
-        "size": "large",
-        "offset": imagesDownloaded,
-        "print_urls": True,
-        "output_directory": output_directory,
-        "image_directory": className
-    }
-    response.download(arguments)
+    if imagesDownloaded < DOWNLOAD_QUANTITY_PER_CLASS:
+        # Download images
+        response = google_images_download.googleimagesdownload()
+        arguments = {
+            "keywords": classKeywords,
+            "limit": DOWNLOAD_QUANTITY_PER_CLASS,
+            "format": "jpg",
+            "color_type": "full-color",
+            "size": "large",
+            "offset": imagesDownloaded,
+            "print_urls": True,
+            "output_directory": output_directory,
+            "image_directory": className
+        }
+        response.download(arguments)
 
     # Check how many images already were augmented for this class
     # This will be useful if some error occured in previous execution
