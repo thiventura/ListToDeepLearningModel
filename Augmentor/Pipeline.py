@@ -188,7 +188,7 @@ class Pipeline(object):
                     self.distinct_formats.add(opened_image.format)
             except IOError as e:
                 print("There is a problem with image %s in your source directory: %s"
-                      % (augmentor_image.image_path, e.message))
+                      % (augmentor_image.image_path, e))
                 self.augmentor_images.remove(augmentor_image)
 
         sys.stdout.write("Initialised with %s image(s) found.\n" % len(self.augmentor_images))
@@ -241,10 +241,10 @@ class Pipeline(object):
                 for i in range(len(images)):
                     if i == 0:
                         save_name = augmentor_image.class_label \
-                                    + "_original_" \
+                                    + "_o_" \
                                     + os.path.basename(augmentor_image.image_path) \
                                     + "_" \
-                                    + file_name \
+                                    + file_name[:5] \
                                     + "." \
                                     + (self.save_format if self.save_format else augmentor_image.file_format)
 
@@ -265,7 +265,7 @@ class Pipeline(object):
                         images[i].save(os.path.join(augmentor_image.output_directory, save_name))
 
             except IOError as e:
-                print("Error writing %s, %s. Change save_format to PNG?" % (file_name, e.message))
+                print("Error writing %s, %s. Change save_format to PNG?" % (file_name, e))
                 print("You can change the save format using the set_save_format(save_format) function.")
                 print("By passing save_format=\"auto\", Augmentor can save in the correct format automatically.")
 
